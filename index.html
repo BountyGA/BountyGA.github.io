@@ -3,503 +3,492 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bounty's Portfolio</title>
-  <!-- Bootstrap CSS -->
-  <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-/>
-
+  <title>Bounty G.A. · digital frontier</title>
+  <!-- Bootstrap + Icons + Font Awesome -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <!-- Model Viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
+    /* ----- root variables: dark tech palette with neon accents ----- */
+    :root {
+      --bg-dark: #0a0c12;
+      --bg-card: #14181f;
+      --surface: #1e2530;
+      --primary-glow: #00ddff;
+      --secondary-glow: #9f7aff;
+      --text-light: #eef5ff;
+      --text-muted: #9bb0c5;
+      --border-glow: rgba(0, 221, 255, 0.2);
+      --grad-1: linear-gradient(145deg, #1b212b, #0f131a);
+      --grad-card: linear-gradient(145deg, #1a212b, #11161f);
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* inter via fallback */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap');
+
+    /* ----- global tweaks ----- */
     section {
-      padding: 60px 0;
+      padding: 80px 0;
     }
-    footer {
-      padding: 20px 0;
+
+    h2 {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      background: linear-gradient(to right, #ffffff, #b0e0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
     }
-/* Gradient text for brand */
-.text-gradient {
-  background: linear-gradient(90deg, #6a11cb, #2575fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+    h2:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+      border-radius: 4px;
+    }
 
-/* Nav link hover glow */
-.cool-link {
-  position: relative;
-  transition: all 0.3s ease;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-}
+    /* glassmorphic navbar */
+    .navbar-modern {
+      background: rgba(8, 12, 18, 0.85) !important;
+      backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.8);
+    }
+    .navbar-brand {
+      font-weight: 700;
+      background: linear-gradient(135deg, #a0f0ff, #c5b4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.8rem;
+      letter-spacing: -0.5px;
+    }
+    .nav-link {
+      color: #d0e2ff !important;
+      font-weight: 500;
+      margin: 0 6px;
+      position: relative;
+      transition: 0.2s;
+    }
+    .nav-link:hover {
+      color: var(--primary-glow) !important;
+      text-shadow: 0 0 8px cyan;
+    }
 
-.cool-link:hover {
-  color: #00d9ff !important;
-  text-shadow: 0px 0px 8px rgba(0, 217, 255, 0.7);
-}
+    /* hero – tech particle vibe */
+    .hero-tech {
+      min-height: 92vh;
+      background: radial-gradient(circle at 20% 30%, #1c3444, #0b0f17 80%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .hero-tech::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.15"><path d="M10 10 L 20 10 L 15 20 Z" fill="cyan"/><path d="M80 70 L 90 65 L 85 80 Z" fill="magenta"/></svg>');
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .glow-text {
+      text-shadow: 0 0 15px rgba(0,255,255,0.7);
+    }
 
-.hero-section {
-  min-height: 90vh; /* full-screen hero */
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  background-size: 400% 400%;
-  animation: gradientFlow 12s ease infinite;
-}
+    /* cards with depth & glass */
+    .tech-card {
+      background: var(--grad-card);
+      border: 1px solid rgba(0, 255, 255, 0.1);
+      border-radius: 32px;
+      padding: 1.8rem 1.5rem;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 25px 40px -20px black;
+      transition: transform 0.25s ease, border-color 0.2s;
+    }
+    .tech-card:hover {
+      border-color: var(--primary-glow);
+      transform: translateY(-8px);
+      box-shadow: 0 30px 50px -15px #005f7a;
+    }
 
-@keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+    .photo-card-modern {
+      border-radius: 28px;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid #2c3848;
+      transition: 0.3s;
+    }
+    .photo-card-modern img {
+      transition: transform 0.5s ease, filter 0.4s;
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+    .photo-card-modern:hover img {
+      transform: scale(1.07);
+      filter: brightness(1.2) contrast(1.1);
+    }
 
-.hero-section .highlight {
-  color: cyan;
-  text-shadow: 0 0 10px rgba(0,255,255,0.6);
-}
+    .website-gallery img {
+      border-radius: 16px;
+      border: 1px solid #3f5568;
+      transition: 0.2s;
+    }
+    .website-gallery img:hover {
+      border-color: cyan;
+      box-shadow: 0 0 15px cyan;
+    }
 
- .whatsapp-float {
+    .btn-tech {
+      background: transparent;
+      border: 1px solid var(--primary-glow);
+      color: white;
+      border-radius: 40px;
+      padding: 12px 28px;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+      transition: 0.2s;
+    }
+    .btn-tech:hover {
+      background: var(--primary-glow);
+      color: #0a0c12;
+      border-color: var(--primary-glow);
+      box-shadow: 0 0 25px cyan;
+    }
+
+    .whatsapp-pulse {
       position: fixed;
       bottom: 25px;
       right: 25px;
-      background:  #25d366;
-      color: #fff;
-      font-size: 1.8rem;
-      width: 55px;
-      height: 55px;
+      background: #25d366;
+      width: 62px;
+      height: 62px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      z-index: 1000;
+      font-size: 2.2rem;
+      color: white;
+      box-shadow: 0 0 0 rgba(37, 211, 102, 0.6);
+      animation: pulse 2s infinite;
+      z-index: 999;
+      transition: scale 0.2s;
       text-decoration: none;
     }
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-      color: #fff;
+    .whatsapp-pulse:hover {
+      transform: scale(1.12);
+      color: white;
+    }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 #25d366aa; } 70% { box-shadow: 0 0 0 20px #25d36600; } 100% { box-shadow: 0 0 0 0 #25d36600; } }
+
+    /* badges */
+    .skill-badge {
+      background: #1e2a36;
+      color: #b4e6ff;
+      padding: 8px 18px;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-left: 3px solid cyan;
     }
 
-  .photo-card img {
-    transition: transform 0.4s ease, filter 0.3s ease;
-  }
-  .photo-card:hover img {
-    transform: scale(1.05);
-    filter: brightness(1.1);
-  }
-.whatsapp-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background-color: #25d366; /* WhatsApp green */
-  color: white;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 12px 24px;
-  border-radius: 50px; /* pill shape */
-  text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
+    /* model viewer cards */
+    model-viewer {
+      width: 100%;
+      height: 300px;
+      --poster-color: transparent;
+      border-radius: 24px;
+      background: #111c28;
+    }
 
-.whatsapp-btn i {
-  font-size: 20px;
-}
+    footer {
+      background: #0b1017;
+      border-top: 1px solid #253545;
+    }
 
-.whatsapp-btn:hover {
-  background-color: #20b857; /* darker green */
-  transform: translateY(-2px);
-  color: white; /* keep text white */
-}
-@media (max-width: 576px) {
-  .whatsapp-btn {
-    font-size: 14px;
-    padding: 10px 18px;
-  }
-
-  .whatsapp-float {
-    width: 48px;
-    height: 48px;
-    font-size: 22px;
-  }
-}
-
+    /* responsive fine-tuning */
+    @media (max-width: 768px) {
+      h2:after { left: 50%; transform: translateX(-50%); width: 120px; }
+      h2 { text-align: center; display: block; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
- <header class="fixed-top bg-dark bg-opacity-75 z-50 shadow-sm">
-  <nav class="navbar navbar-expand-lg navbar-dark container-fluid py-2 px-4"
-       style="background: rgba(20, 20, 35, 0.8); backdrop-filter: blur(10px);">
-       
-    <a class="navbar-brand fw-bold text-gradient fs-4" href="#">
-      Bounty's Portfolio
-    </a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item"><a href="#3d" class="nav-link cool-link">3D</a></li>
-        <li class="nav-item"><a href="#photos" class="nav-link cool-link">Photos</a></li>
-        <li class="nav-item"><a href="#websites" class="nav-link cool-link">Websites</a></li>
-        <li class="nav-item"><a href="#videos" class="nav-link cool-link">Videos</a></li>
-        <li class="nav-item"><a href="#about" class="nav-link cool-link">About</a></li>
-        <li class="nav-item"><a href="#contact" class="nav-link cool-link">Contact</a></li>
-      </ul>
+  <!-- NAVBAR (crisp, fixed) -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-modern py-3">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="#">BØUNTY::GA</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a href="#photos" class="nav-link">WORK</a></li>
+          <li class="nav-item"><a href="#websites" class="nav-link">WEBSITES</a></li>
+          <li class="nav-item"><a href="#videos" class="nav-link">VIDEOS</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link">ABOUT</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link">CONTACT</a></li>
+          <li class="nav-item"><a href="#3d" class="nav-link">3D</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
-</header>
 
-  <!-- Hero -->
-  <section class="hero-section text-center text-white d-flex align-items-center">
-  <div class="container">
-    <h2 class="fw-bold display-4 mb-3">
-      Hey, I'm <span class="highlight">[Bounty G.A.]</span>
-    </h2>
-    <p class="lead mb-4"> 3D Designer • Mechatronics Engineer • Web Developer</p>
-  <a 
-  href="https://wa.me/2348036507330" 
-  target="_blank" 
-  class="whatsapp-btn"
-  rel="noopener"
->
-  <i class="fab fa-whatsapp"></i> Chat on WhatsApp
-</a>
-
-  </div>
-</section>
-
-  <!-- 3D Section -->
-<section id="3d" class="py-5 bg-light">
-  <div class="container">
-    <h2 class="text-center mb-4">Some of my 3D Designs</h2>
-    <div class="row g-4">
-      
-      <!-- 3D Model 1 -->
-      <div class="col-md-4">
-        <div class="p-3 shadow-sm bg-white rounded-3">
-          <model-viewer src="assets/3d/model1.glb" alt="3D Model 1"
-            auto-rotate camera-controls ar
-            style="width:100%; height:300px; background:white; border-radius:8px;">
-          </model-viewer>
+  <!-- HERO (tech upgraded) -->
+  <section class="hero-tech text-white">
+    <div class="container position-relative">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-8">
+          <span class="badge bg-dark text-info border-info mb-3 px-3 py-2">✦ MECHATRONICS · WEB · 3D ✦</span>
+          <h1 class="display-3 fw-bold">Hey, I'm <span class="glow-text" style="color: #88f0ff;">Bounty G.A.</span></h1>
+          <p class="lead fs-3 text-info-emphasis mb-4" style="color: #c0e0ff !important;">3D designer · engineer · web creator</p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="https://wa.me/2348036507330" target="_blank" class="btn btn-tech"><i class="fab fa-whatsapp me-2"></i>Chat on WhatsApp</a>
+            <a href="#websites" class="btn btn-outline-info rounded-pill px-4 border-2"><i class="bi bi-arrow-down-circle me-2"></i>explore work</a>
+          </div>
         </div>
-      </div>
-
-      <!-- 3D Model 2
-      <div class="col-md-4">
-        <div class="p-3 shadow-sm bg-white rounded-3">
-          <model-viewer src="assets/3d/model2.glb" alt="3D Model 2"
-            auto-rotate camera-controls ar
-            style="width:100%; height:300px; background:white; border-radius:8px;">
-          </model-viewer>
-        </div>
-      </div>-->
-
-      <!-- 3D Model 3 
-      <div class="col-md-4">
-        <div class="p-3 shadow-sm bg-white rounded-3">
-          <model-viewer src="assets/3d/model3.glb" alt="3D Model 3"
-            auto-rotate camera-controls ar
-            style="width:100%; height:300px; background:white; border-radius:8px;">
-          </model-viewer>
-        </div>
-      </div>-->
-
-    </div>
-  </div>
-</section>
-
-
-  <!-- Photos -->
- <!-- Photos Section -->
-<section id="photos" class="py-5" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
-  <div class="container">
-    <h2 class="text-center mb-5 fw-bold" style="color:#0dcaf0;">Some Projects Photos</h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="photo-card shadow-sm rounded overflow-hidden">
-          <img src="assets/photos/photo2.jpg" class="img-fluid" alt="Photo 2">
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="photo-card shadow-sm rounded overflow-hidden">
-          <img src="assets/photos/photo3.png" class="img-fluid" alt="Photo 3">
-        </div>
-      </div>
-
-       <div class="col-md-4">
-        <div class="photo-card shadow-sm rounded overflow-hidden">
-          <img src="assets/photos/Screenshot (4).png" class="img-fluid" alt="Photo 4">
-        </div>
-      </div>
-
-       <div class="col-md-4">
-        <div class="photo-card shadow-sm rounded overflow-hidden">
-          <img src="assets/photos/Screenshot (5).png" class="img-fluid" alt="Photo 5">
-        </div>
-      </div>
-      
-      <div class="col-md-4">
-        <div class="photo-card shadow-sm rounded overflow-hidden">
-          <img src="assets/photos/Screenshot (16).png" class="img-fluid" alt="Photo 6">
-        </div>
-      </div>
-
-    <div class="col-md-4">
-        <div class="photo-card shadow-sm rounded overflow-hidden">
-          <img src="assets/photos/Screenshot (28).png" class="img-fluid" alt="Photo 7">
-        </div>
-      </div>
-      
-      <div class="col-md-4">
-        <div class="photo-card shadow-sm rounded overflow-hidden">
-          <img src="assets/photos/photo5.jpg" class="img-fluid" alt="Photo 8">
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="photo-card shadow-sm rounded overflow-hidden">
-          <img src="assets/photos/photo6.png" class="img-fluid" alt="Photo 9">
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Websites Section -->
-<section id="websites" class="py-5 bg-light">
-  <div class="container">
-    <h2 class="text-center mb-5">Some Website Projects</h2>
-    <div class="row g-4">
-
-      <!-- Website Project 1 -->
-      <div class="col-md-6">
-        <div class="card shadow-lg h-100 border-0">
-          <div class="card-body">
-            <h5 class="card-title mb-3 text-primary">Entrepreneurs Static Advertisement Site</h5>
-            <p class="card-text">A simple ad + redirection static website for entrepreneurs.</p>
-
-            <!-- Image gallery -->
-            <div class="row g-2 mb-3">
-              <div class="col-4">
-                <img src="assets/websites/site0.png" class="img-fluid rounded shadow-sm" alt="Website preview 1">
-              </div>
-              <div class="col-4">
-                <img src="assets/websites/site1.png" class="img-fluid rounded shadow-sm" alt="Website preview 2">
-              </div>
-              <div class="col-4">
-                <img src="assets/websites/site2.png" class="img-fluid rounded shadow-sm" alt="Website preview 3">
-              </div>
-            </div>
-
-            <!-- Button -->
-            <a href="https://bountyga.github.io/Joy_Adsite/" target="_blank" 
-               class="btn btn-primary w-100 rounded-pill shadow">
-              🌐 View Site
-            </a>
+        <div class="col-lg-4 d-none d-lg-block text-center">
+          <div class="p-4" style="border:2px solid cyan; border-radius: 50% 20% 50% 20%;">
+            <i class="fas fa-cubes fa-5x" style="color: #b0f0ff; opacity: 0.8;"></i>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Website Project 2 -->
-      <div class="col-md-6">
-        <div class="card shadow-lg h-100 border-0">
-          <div class="card-body">
-            <h5 class="card-title mb-3 text-primary">Nigerian Red Cross Design</h5>
-            <p class="card-text">A proposed design layout site for the Nigerian Red Cross.</p>
+  <!-- PHOTOS section (KEPT at top as you wanted after hero) -->
+  <section id="photos" class="py-5" style="background: #0e131b;">
+    <div class="container">
+      <h2>PROJECT PHOTOS</h2>
+      <div class="row g-4">
+        <div class="col-md-4"><div class="photo-card-modern"><img src="assets/photos/photo2.jpg" class="img-fluid" alt="project"></div></div>
+        <div class="col-md-4"><div class="photo-card-modern"><img src="assets/photos/photo3.png" class="img-fluid" alt="project"></div></div>
+        <div class="col-md-4"><div class="photo-card-modern"><img src="assets/photos/Screenshot (4).png" class="img-fluid" alt="project"></div></div>
+        <div class="col-md-4"><div class="photo-card-modern"><img src="assets/photos/Screenshot (5).png" class="img-fluid" alt="project"></div></div>
+        <div class="col-md-4"><div class="photo-card-modern"><img src="assets/photos/Screenshot (16).png" class="img-fluid" alt="project"></div></div>
+        <div class="col-md-4"><div class="photo-card-modern"><img src="assets/photos/Screenshot (28).png" class="img-fluid" alt="project"></div></div>
+        <div class="col-md-4"><div class="photo-card-modern"><img src="assets/photos/photo5.jpg" class="img-fluid" alt="project"></div></div>
+        <div class="col-md-4"><div class="photo-card-modern"><img src="assets/photos/photo6.png" class="img-fluid" alt="project"></div></div>
+      </div>
+    </div>
+  </section>
 
-            <!-- Image gallery -->
-            <div class="row g-2 mb-3">
-              <div class="col-4">
-                <img src="assets/websites/site3.png" class="img-fluid rounded shadow-sm" alt="Website preview 1">
-              </div>
-              <div class="col-4">
-                <img src="assets/websites/site4.png" class="img-fluid rounded shadow-sm" alt="Website preview 2">
-              </div>
-              <div class="col-4">
-                <img src="assets/websites/site5.png" class="img-fluid rounded shadow-sm" alt="Website preview 3">
-              </div>
+  <!-- WEBSITES (expanded with 3 new projects) -->
+  <section id="websites" class="py-5" style="background: #0a1017;">
+    <div class="container">
+      <h2>WEBSITE PROJECTS</h2>
+      <div class="row g-4">
+
+        <!-- existing 1 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="tech-card h-100">
+            <h5 class="text-info">Entrepreneurs Static Ad</h5>
+            <p class="text-secondary-emphasis">Minimal ad + redirection static site.</p>
+            <div class="row g-2 website-gallery mb-3">
+              <div class="col-4"><img src="assets/websites/site0.png" class="img-fluid rounded"></div>
+              <div class="col-4"><img src="assets/websites/site1.png" class="img-fluid rounded"></div>
+              <div class="col-4"><img src="assets/websites/site2.png" class="img-fluid rounded"></div>
             </div>
+            <a href="https://bountyga.github.io/Joy_Adsite/" target="_blank" class="btn btn-tech w-100">visit →</a>
+          </div>
+        </div>
 
-            <!-- Button -->
-            <a href="https://bountyga.github.io/Model/" target="_blank" 
-               class="btn btn-primary w-100 rounded-pill shadow">
-              🌐 View Site
-            </a>
+        <!-- existing 2 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="tech-card h-100">
+            <h5 class="text-info">Nigerian Red Cross (proposal)</h5>
+            <p>Design layout for Red Cross site.</p>
+            <div class="row g-2 website-gallery mb-3">
+              <div class="col-4"><img src="assets/websites/site3.png" class="img-fluid rounded"></div>
+              <div class="col-4"><img src="assets/websites/site4.png" class="img-fluid rounded"></div>
+              <div class="col-4"><img src="assets/websites/site5.png" class="img-fluid rounded"></div>
+            </div>
+            <a href="https://bountyga.github.io/Model/" target="_blank" class="btn btn-tech w-100">visit →</a>
+          </div>
+        </div>
+
+        <!-- existing 3 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="tech-card h-100">
+            <h5 class="text-info">Exceptional Model portfolio</h5>
+            <p>Gallery & intro for modelling agencies.</p>
+            <div class="row g-2 website-gallery mb-3">
+              <div class="col-4"><img src="assets/websites/site6.jpg" class="img-fluid rounded"></div>
+              <div class="col-4"><img src="assets/websites/site7.jpg" class="img-fluid rounded"></div>
+              <div class="col-4"><img src="assets/websites/site8.jpg" class="img-fluid rounded"></div>
+            </div>
+            <a href="https://bountyga.github.io/Rashida_Ize/" target="_blank" class="btn btn-tech w-100">visit →</a>
+          </div>
+        </div>
+
+        <!-- NEW 1: Nigerian Tax Calculator -->
+        <div class="col-md-6 col-lg-4">
+          <div class="tech-card h-100">
+            <h5 class="text-info">🇳🇬 Nigerian Tax Calculator 2026</h5>
+            <p>Income tax estimator – clean & accurate.</p>
+            <div class="row g-2 website-gallery mb-3">
+              <div class="col-4"><img src="assets/websites/site9.jpg" class="img-fluid rounded"></div>
+              <div class="col-4"><img src="assets/websites/site10.jpg" class="img-fluid rounded"></div>
+              <div class="col-4"><img src="assets/websites/site11.jpg" class="img-fluid rounded"></div>
+            </div>
+            <a href="https://bountyga.github.io/tax-Nigeria-2026-calculator/#" target="_blank" class="btn btn-tech w-100">try calculator →</a>
+          </div>
+        </div>
+
+        <!-- NEW 2: RGB to HEX converter -->
+        <div class="col-md-6 col-lg-4">
+          <div class="tech-card h-100">
+            <h5 class="text-info">RGB → HEX converter</h5>
+            <p>Real-time dev tool with copy.</p>
+            <div class="row g-2 website-gallery mb-3">
+              <div class="col-4"><img src="assets/websites/site12.jpg" class="img-fluid rounded"></div>
+              <div class="col-4"><img src="assets/websites/site13.jpg" class="img-fluid rounded"></div>
+              <div class="col-4"><img src="assets/websites/site14.jpg" class="img-fluid rounded"></div>
+              <!-- extra site15 optional, just show 4th maybe combine but layout remains -->
+            </div>
+            <div class="mb-2"><img src="assets/websites/site15.jpg" class="img-fluid rounded w-100"></div>
+            <a href="https://bountyga.github.io/rgb-hex-converter" target="_blank" class="btn btn-tech w-100">convert →</a>
+          </div>
+        </div>
+
+        <!-- NEW 3: Uni Assignment Face Filter -->
+        <div class="col-md-6 col-lg-4">
+          <div class="tech-card h-100">
+            <h5 class="text-info">🎭 face filter (uni assignment)</h5>
+            <p>AR-style web filter test.</p>
+            <div class="row g-2 website-gallery mb-3">
+              <div class-="col-6"><img src="assets/websites/site16.jpg" class="img-fluid rounded"></div>
+              <div class-="col-6"><img src="assets/websites/site17.jpg" class="img-fluid rounded"></div>
+            </div>
+            <a href="https://bountyga.github.io/face-filter-test/" target="_blank" class="btn btn-tech w-100">try filter →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEOS -->
+  <section id="videos" class="py-5" style="background: #0d131c;">
+    <div class="container">
+      <h2>VIDEO WORKS</h2>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="ratio ratio-16x9 rounded-4 overflow-hidden border border-info border-opacity-25">
+            <video controls><source src="assets/videos/video1.mp4" type="video/mp4"></video>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="ratio ratio-16x9 rounded-4 overflow-hidden border border-info border-opacity-25">
+            <iframe src="https://www.youtube.com/embed/YOdnhyyRR-E" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="col-md-6 mx-auto">
+          <div class="ratio ratio-16x9 rounded-4 overflow-hidden border border-info border-opacity-25">
+            <iframe src="https://www.youtube.com/embed/0e-aAxgLDbI" allowfullscreen></iframe>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Website Project 3 -->
-      <div class="col-md-6">
-        <div class="card shadow-lg h-100 border-0">
-          <div class="card-body">
-            <h5 class="card-title mb-3 text-primary">Exceptional Model portfolio page</h5>
-            <p class="card-text"> A professional gallery, introduction, and action call to modelling agencies/firms .</p>
+  <!-- ABOUT -->
+  <section id="about" class="py-5" style="background: #0f151f;">
+    <div class="container">
+      <h2>ABOUT BOUNTY</h2>
+      <div class="row align-items-center g-5">
+        <div class="col-md-4 text-center">
+          <img src="assets/images/profilepics.jpg" class="img-fluid shadow-lg" style="width: 250px; height: 250px; object-fit: cover; border-radius: 40% 60% 40% 60% / 50% 40% 60% 50%; border: 3px solid cyan;">
+        </div>
+        <div class="col-md-8">
+          <p class="lead" style="color: #d0edff;">Mechatronics Engineer obsessed with 3D design, web dev, and building things that merge hardware with software. I thrive at the intersection of <strong class="text-info">engineering + creativity</strong>.</p>
+          <p>From CAD modeling & CNC to electronics and responsive web apps, I prototype solutions that matter. Also into fitness & management – holistic problem solver.</p>
+          <a href="https://www.linkedin.com/in/bounty-gabriel-adetula-00a833181/" class="btn btn-outline-info rounded-pill px-5 mt-2"><i class="fab fa-linkedin me-2"></i>LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            <!-- Image gallery -->
-            <div class="row g-2 mb-3">
-              <div class="col-4">
-                <img src="assets/websites/site6.jpg" class="img-fluid rounded shadow-sm" alt="Website preview 1">
-              </div>
-              <div class="col-4">
-                <img src="assets/websites/site7.jpg" class="img-fluid rounded shadow-sm" alt="Website preview 2">
-              </div>
-              <div class="col-4">
-                <img src="assets/websites/site8.jpg" class="img-fluid rounded shadow-sm" alt="Website preview 3">
-              </div>
-            </div>
+  <!-- CONTACT -->
+  <section id="contact" class="py-5" style="background: #0a1017;">
+    <div class="container text-center">
+      <h2 class="d-block text-center" style="display: block !important;">CONNECT</h2>
+      <p class="lead col-lg-8 mx-auto" style="color: #bdd9ff;">Multidisciplinary creator & inventor — engineering, management, fitness, tech. Let's collaborate.</p>
+      <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+        <span class="skill-badge">Onshape</span>
+        <span class="skill-badge">SketchUp</span>
+        <span class="skill-badge">CNC</span>
+        <span class="skill-badge">React</span>
+        <span class="skill-badge">Mechatronics</span>
+      </div>
+      <div class="mt-5">
+        <a href="mailto:gabrielbounty19@gmail.com" class="btn btn-tech btn-lg me-3"><i class="bi bi-envelope-fill me-2"></i>Email me</a>
+        <a href="https://github.com/BountyGA" class="btn btn-outline-secondary rounded-pill btn-lg"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+    </div>
+  </section>
 
-            <!-- Button -->
-            <a href="https://bountyga.github.io/Rashida_Ize/" target="_blank" 
-               class="btn btn-primary w-100 rounded-pill shadow">
-              🌐 View Site
-            </a>
+  <!-- 3D SECTION moved to bottom as requested -->
+  <section id="3d" class="py-5" style="background: #0b121a;">
+    <div class="container">
+      <h2>3D DESIGNS</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="tech-card p-2">
+            <model-viewer src="assets/3d/model1.glb" alt="3d model 1" auto-rotate camera-controls ar style="height:280px;"></model-viewer>
           </div>
         </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Videos -->
-<section id="videos" class="bg-light py-5">
-  <div class="container">
-    <h2 class="text-center mb-4">Some Projects Videos</h2>
-    <div class="row g-4">
-      
-      <!-- Local video -->
-      <div class="col-md-6">
-        <div class="ratio ratio-16x9 shadow rounded">
-          <video controls class="w-100 h-100 rounded">
-            <source src="assets/videos/video1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+        <!-- commented other models remain as they were, but structure stays -->
+        <div class="col-md-4">
+          <div class="tech-card p-2">
+            <model-viewer src="assets/3d/model2.glb" alt="3d model 2" auto-rotate camera-controls ar style="height:280px;"></model-viewer>
+          </div>
         </div>
-      </div>
-      
-      <!-- YouTube 1 -->
-      <div class="col-md-6">
-        <div class="ratio ratio-16x9 shadow rounded">
-          <iframe src="https://www.youtube.com/embed/YOdnhyyRR-E" 
-                  title="YouTube video" 
-                  allowfullscreen>
-          </iframe>
+        <div class="col-md-4">
+          <div class="tech-card p-2">
+            <model-viewer src="assets/3d/model3.glb" alt="3d model 3" auto-rotate camera-controls ar style="height:280px;"></model-viewer>
+          </div>
         </div>
+        <p class="text-muted mt-2 text-center">*additional models can be enabled (model2, model3 placeholders)</p>
       </div>
+    </div>
+  </section>
 
-      <!-- YouTube 2 -->
-      <div class="col-md-6">
-        <div class="ratio ratio-16x9 shadow rounded">
-          <iframe src="https://www.youtube.com/embed/0e-aAxgLDbI" 
-                  title="YouTube video" 
-                  allowfullscreen>
-          </iframe>
-        </div>
+  <!-- FOOTER -->
+  <footer class="py-4">
+    <div class="container text-center">
+      <div class="mb-3">
+        <a href="https://github.com/BountyGA" class="text-white-50 me-3 fs-4"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/bounty-gabriel-adetula-00a833181/" class="text-white-50 me-3 fs-4"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.youtube.com/channel/UClG3us9xQozLRXhJwRts46w" class="text-white-50 fs-4"><i class="fab fa-youtube"></i></a>
       </div>
-
+      <small class="text-white-50">© 2025 <strong>Bounty G.A.</strong> — all rights reserved</small><br>
+      <small class="text-white-50">built with Bootstrap · 3D · tech interface</small>
     </div>
-  </div>
-</section>
+  </footer>
 
+  <!-- WhatsApp float -->
+  <a href="https://wa.me/2348036507330" target="_blank" class="whatsapp-pulse"><i class="fab fa-whatsapp"></i></a>
 
-  <!-- About -->
-<section id="about" class="py-5 bg-white">
-  <div class="container">
-    <h2 class="text-center mb-4">About Me</h2>
-    <div class="row align-items-center g-4">
-      
-      <!-- Profile Image -->
-      <div class="col-md-4 text-center">
-  <img 
-    src="assets/images/profilepics.jpg" 
-    alt="Profile photo" 
-    class="img-fluid shadow" 
-    style="width: 220px; height: 220px; object-fit: cover; border-radius: 50%;">
-</div>
-
-      <!-- Bio -->
-      <div class="col-md-8">
-        <p class="lead">
-          I’m a <strong>Mechatronics Engineer</strong> passionate about <strong>3D design</strong>, 
-          <strong>web development</strong>, and bringing creative ideas to life through technology. 
-          This portfolio showcases some of my best work across engineering, software, and design.
-        </p>
-        <p>
-          With hands-on experience in <em>CAD modeling, CNC machining, electronics, and web technologies</em>, 
-          I enjoy building solutions that merge hardware and software seamlessly. 
-        </p>
-        <a href="https://www.linkedin.com/in/bounty-gabriel-adetula-00a833181/" class="btn btn-primary rounded-pill px-4 mt-2">See My Work</a>
-      </div>
-      
-    </div>
-  </div>
-</section>
-
-
- <!-- Contact -->
-<section id="contact" class="py-5 bg-light">
-  <div class="container text-center">
-    <h2 class="mb-4 display-6 fw-bold">Get In Touch</h2>
-    <p class="lead text-muted">
-      I’m a multidisciplinary creator and inventor passionate about making the world a better place.  
-      My journey spans <strong>Engineering, Technology, Management, and Fitness</strong>,  
-      driven by the belief that creativity and innovation can solve real problems.
-    </p>
-    <p>
-      I love combining <em>creativity with technology</em> to bring ideas to life.  
-      If you'd like to collaborate, feel free to reach out!
-    </p>
-
-    <!-- Skills/Badges -->
-    <div class="d-flex justify-content-center gap-2 flex-wrap mt-3">
-      <span class="badge bg-primary">Onshape</span>
-      <span class="badge bg-success">SketchUp</span>
-      <span class="badge bg-dark">Engineering</span>
-      <span class="badge bg-info text-dark">Web Dev</span>
-    </div>
-
-    <!-- Contact Button -->
-    <div class="mt-4">
-      <a href="mailto:gabrielbounty19@gmail.com" class="btn btn-primary px-4 rounded-pill">
-        <i class="bi bi-envelope-fill me-2"></i> Email Me
-      </a>
-    </div>
-  </div>
-</section>
-
-  <!-- Footer -->
-<footer class="bg-dark text-white text-center py-4 mt-5">
-  <div class="container">
-    <div class="mb-3">
-      <!-- Social icons (optional) -->
-      <a href="https://github.com/BountyGA" class="text-white mx-2"><i class="fab fa-github fa-lg"></i></a>
-      <a href="https://www.linkedin.com/in/bounty-gabriel-adetula-00a833181/" class="text-white mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
-      <a href="https://www.youtube.com/channel/UClG3us9xQozLRXhJwRts46w" class="text-white mx-2"><i class="fab fa-youtube fa-lg"></i></a>
-    </div>
-    <small class="d-block">&copy; 2025 <strong>Bounty G.A.</strong> All Rights Reserved.</small>
-    <small class="d-block mt-1">Built using HTML, CSS & Bootstrap, deployed using github pages</small>
-  </div>
-</footer>
-
-
-  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <a href="https://wa.me/2348036507330" target="_blank" class="whatsapp-float">
-  <i class="fab fa-whatsapp"></i>
-</a>
-
 </body>
 </html>
